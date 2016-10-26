@@ -32,6 +32,21 @@ android {
         }
     }
 
+    productFlavors {
+        dev {
+            buildConfigField "String", "APP_NAME", '"Infrastructure"'
+            buildConfigField "String", "API_URL", '"http://example.url/"'
+        }
+        stage {
+            buildConfigField "String", "APP_NAME", '"Infrastructure"'
+            buildConfigField "String", "API_URL", '"http://example.url/"'
+        }
+        prod {
+            buildConfigField "String", "APP_NAME", '"Infrastructure"'
+            buildConfigField "String", "API_URL", '"https://example.url/"'
+        }
+    }
+
     packagingOptions {
         exclude 'META-INF/LICENSE.txt'
         exclude 'META-INF/notice.txt'
