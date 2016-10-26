@@ -38,3 +38,24 @@ captures/
 
 # Keystore files
 *.jks
+
+.gradle/
+.gradle
+/build
+*.iml`
+/.idea
+*/*.iml
+/.idea/*
+/local.properties
+*.log
+*/*.log
+*.class
+
+.gradle/
+bin/
+gen/
+out/
+
+captures/
+
+.DS_Store
