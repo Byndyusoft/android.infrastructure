@@ -2,4 +2,8 @@
 <resources>
     <dimen name="menu_header_height">172dp</dimen>
     <dimen name="toolbar_margin_start">16dp</dimen>
+
+    <dimen name="list_item_margin">4dp</dimen>
+    <dimen name="list_item_corner_radius">4dp</dimen>
+    <dimen name="list_item_elevation">4dp</dimen>
 </resources>

@@ -45,6 +45,7 @@ public abstract class MainFragment extends BaseFragment {
         getMainFragmentCallback().setToolbarColor(getToolbarColor());
         getMainFragmentCallback().setToolbarTitle(getToolbarTitle());
         getMainFragmentCallback().setFragmentFullscreen(isFullscreen());
+        getMainFragmentCallback().setNavigationButtonType(getNavButtonType());
     }
 
     protected MainFragmentCallback getMainFragmentCallback() {
@@ -65,6 +66,10 @@ public abstract class MainFragment extends BaseFragment {
 
     protected boolean isFullscreen() {
         return false;
+    }
+
+    protected MainFragmentCallback.NavButtonType getNavButtonType() {
+        return MainFragmentCallback.NavButtonType.None;
     }
 
     protected

@@ -42,6 +42,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private NavigationView navigationView;
     private AppBarLayout appBarLayout;
 
+    private NavButtonType navButtonType;
+
     private static ActivityMainComponent component;
 
     public static ActivityMainComponent getComponent() {
@@ -76,6 +78,26 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     @Override
     protected int getLayoutId() {
         return R.layout.activity_main;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (super.onOptionsItemSelected(item)) {
+            return true;
+        }
+        switch (item.getItemId()) {
+            case android.R.id.home: {
+                if (navButtonType == NavButtonType.Arrow) {
+                    popBackStack();
+                } else if (navButtonType == NavButtonType.Menu && drawer.isDrawerOpen(GravityCompat.START)) {
+                    drawer.closeDrawer(GravityCompat.START);
+                } else if (navButtonType == NavButtonType.Menu && !drawer.isDrawerOpen(GravityCompat.START)) {
+                    drawer.openDrawer(GravityCompat.START);
+                }
+                break;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -135,5 +157,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             lp.addRule(RelativeLayout.BELOW, R.id.main_appbar);
         }
         fragmentContainer.setLayoutParams(lp);
+    }
+
+    @Override
+    public void setNavigationButtonType(@NonNull NavButtonType navigationButtonType) {
+        this.navButtonType = navigationButtonType;
+        if (navigationButtonType == NavButtonType.None) {
+            toolbar.setNavigationIcon(null);
+        } else {
+            toolbar.setNavigationIcon(navigationButtonType.iconRes);
+        }
     }
 }

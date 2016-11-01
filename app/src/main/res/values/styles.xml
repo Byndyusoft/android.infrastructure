@@ -19,7 +19,7 @@
 
     <style name="AppTheme.Main" parent="@style/AppTheme">
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="android:textColorPrimary">@color/black</item>
+        <item name="android:textColorPrimary">@color/white</item>
         <item name="android:actionBarStyle">@style/Theme.Main.ActionBar</item>
     </style>
 
