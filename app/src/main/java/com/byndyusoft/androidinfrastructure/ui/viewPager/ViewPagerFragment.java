@@ -2,6 +2,8 @@ package com.byndyusoft.androidinfrastructure.ui.viewPager;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 
 import com.byndyusoft.androidinfrastructure.R;
@@ -24,7 +26,13 @@ public class ViewPagerFragment extends MainFragment {
 
     @Override
     protected void onViewInflated(@NonNull View view) {
+        ViewPager viewPager = (ViewPager) view.findViewById(R.id.view_pager);
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager());
+        viewPager.setAdapter(viewPagerAdapter);
 
+        TabLayout tabLayout = (TabLayout) view.findViewById(R.id.pager_tabs);
+        tabLayout.setupWithViewPager(viewPager);
+        tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
     }
 
     @Override
