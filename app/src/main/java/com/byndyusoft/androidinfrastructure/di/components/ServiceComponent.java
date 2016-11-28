@@ -7,5 +7,5 @@ package com.byndyusoft.androidinfrastructure.di.components;
  * on 26.10.2016.
  */
 
-public class ServiceComponent {
+public interface ServiceComponent {
 }

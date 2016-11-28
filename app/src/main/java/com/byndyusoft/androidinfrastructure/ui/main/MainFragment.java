@@ -30,7 +30,7 @@ public abstract class MainFragment extends BaseFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        MainActivity.getComponent().inject(this);
+        ((MainActivity) getActivity()).getComponent().inject(this);
     }
 
     @Override

@@ -44,9 +44,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
     private NavButtonType navButtonType;
 
-    private static ActivityMainComponent component;
+    private ActivityMainComponent component;
 
-    public static ActivityMainComponent getComponent() {
+    public ActivityMainComponent getComponent() {
         return component;
     }
 
