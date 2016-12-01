@@ -12,6 +12,11 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    configurations.all {
+        //http://stackoverflow.com/questions/37347326/errorconflict-with-dependency-com-google-code-findbugsjsr305
+        resolutionStrategy.force 'com.google.code.findbugs:jsr305:3.0.1'
+    }
+
     defaultConfig {
         applicationId "com.byndyusoft.androidinfrastructure"
         minSdkVersion 16
@@ -110,42 +115,42 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.0-alpha8'
 
     compile(
-            'com.squareup.okhttp3:okhttp:3.2.0',
-            'com.squareup.okhttp3:okhttp-urlconnection:3.2.0',
-            'com.squareup.okhttp3:logging-interceptor:3.2.0',
+            'com.squareup.okhttp3:okhttp:3.4.2',
+            'com.squareup.okhttp3:okhttp-urlconnection:3.4.2',
+            'com.squareup.okhttp3:logging-interceptor:3.4.2',
 
-            'com.squareup.retrofit2:retrofit:2.0.1',
-            'com.squareup.retrofit2:converter-gson:2.0.1',
-            'com.squareup.retrofit2:adapter-rxjava:2.0.1',
+            'com.squareup.retrofit2:retrofit:2.1.0',
+            'com.squareup.retrofit2:converter-gson:2.1.0',
+            'com.squareup.retrofit2:adapter-rxjava:2.1.0',
 
             'com.squareup.picasso:picasso:2.5.2',
-            'com.jakewharton.picasso:picasso2-okhttp3-downloader:1.0.2',
+            'com.jakewharton.picasso:picasso2-okhttp3-downloader:1.1.0',
     )
 
     // RX
     compile(
-            'io.reactivex:rxandroid:1.0.1',
-            'io.reactivex:rxjava:1.0.14',
-            'com.trello:rxlifecycle:0.4.0',
-            'com.trello:rxlifecycle-components:0.4.0',
+            'io.reactivex:rxandroid:1.2.1',
+            'io.reactivex:rxjava:1.1.6',
+            'com.trello:rxlifecycle:1.0',
+            'com.trello:rxlifecycle-components:1.0',
     )
 
     // Dagger
-    apt 'com.google.guava:guava:19.0'
-    compile 'com.google.dagger:dagger:2.4'
-    apt 'com.google.dagger:dagger-compiler:2.4'
+    apt 'com.google.guava:guava:20.0'
+    compile 'com.google.dagger:dagger:2.7'
+    apt 'com.google.dagger:dagger-compiler:2.7'
     provided 'javax.annotation:jsr250-api:1.0'
     compile 'javax.inject:javax.inject:1'
 
     // UI libraries
-    compile 'com.afollestad.material-dialogs:core:0.8.5.9'
-    compile 'com.github.johnkil.android-robototextview:robototextview:2.5.0'
+    compile 'com.afollestad.material-dialogs:core:0.9.1.0'
+    compile 'com.github.johnkil.android-robototextview:robototextview:2.5.1'
     compile 'com.joooonho:selectableroundedimageview:1.0.1'
 }
 
 android.applicationVariants.all{ variant ->
     variant.mergeAssets.doFirst {
-        File fonts = file("${projectDir}/build/intermediates/exploded-aar/com.github.johnkil.android-robototextview/robototextview/2.5.0/assets/fonts")
+        File fonts = file("${projectDir}/build/intermediates/exploded-aar/com.github.johnkil.android-robototextview/robototextview/2.5.1/assets/fonts")
         if (fonts.exists()) {
 
             for (File file : fonts.listFiles()) {

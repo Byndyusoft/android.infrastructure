@@ -6,9 +6,13 @@ import android.support.annotation.CallSuper;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
-import com.trello.rxlifecycle.FragmentEvent;
-import com.trello.rxlifecycle.FragmentLifecycleProvider;
+import com.trello.rxlifecycle.LifecycleProvider;
+import com.trello.rxlifecycle.LifecycleTransformer;
 import com.trello.rxlifecycle.RxLifecycle;
+import com.trello.rxlifecycle.android.ActivityEvent;
+import com.trello.rxlifecycle.android.FragmentEvent;
+
+import javax.annotation.Nonnull;
 
 import rx.Observable;
 import rx.subjects.BehaviorSubject;
@@ -20,7 +24,7 @@ import rx.subjects.BehaviorSubject;
  * on 26.10.2016.
  */
 
-public class RxFragment extends Fragment implements FragmentLifecycleProvider {
+public class RxFragment extends Fragment implements LifecycleProvider {
 
     private final BehaviorSubject<FragmentEvent> lifecycleSubject = BehaviorSubject.create();
 
@@ -29,14 +33,16 @@ public class RxFragment extends Fragment implements FragmentLifecycleProvider {
         return lifecycleSubject.asObservable();
     }
 
+    @Nonnull
     @Override
-    public final <T> Observable.Transformer<T, T> bindUntilEvent(FragmentEvent event) {
-        return RxLifecycle.bindUntilFragmentEvent(lifecycleSubject, event);
+    public LifecycleTransformer bindToLifecycle() {
+        return RxLifecycle.bind(lifecycle());
     }
 
+    @Nonnull
     @Override
-    public final <T> Observable.Transformer<T, T> bindToLifecycle() {
-        return RxLifecycle.bindFragment(lifecycleSubject);
+    public LifecycleTransformer bindUntilEvent(@Nonnull Object event) {
+        return RxLifecycle.bindUntilEvent(lifecycle(), (FragmentEvent) event);
     }
 
     @Override

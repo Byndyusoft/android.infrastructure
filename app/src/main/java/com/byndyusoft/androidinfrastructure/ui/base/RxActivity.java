@@ -4,9 +4,12 @@ import android.os.Bundle;
 import android.support.annotation.CallSuper;
 import android.support.v7.app.AppCompatActivity;
 
-import com.trello.rxlifecycle.ActivityEvent;
-import com.trello.rxlifecycle.ActivityLifecycleProvider;
+import com.trello.rxlifecycle.LifecycleProvider;
+import com.trello.rxlifecycle.LifecycleTransformer;
 import com.trello.rxlifecycle.RxLifecycle;
+import com.trello.rxlifecycle.android.ActivityEvent;
+
+import javax.annotation.Nonnull;
 
 import rx.Observable;
 import rx.subjects.BehaviorSubject;
@@ -18,7 +21,7 @@ import rx.subjects.BehaviorSubject;
  * on 26.10.2016.
  */
 
-public class RxActivity extends AppCompatActivity implements ActivityLifecycleProvider {
+public class RxActivity extends AppCompatActivity implements LifecycleProvider {
 
     private final BehaviorSubject<ActivityEvent> lifecycleSubject = BehaviorSubject.create();
 
@@ -27,14 +30,16 @@ public class RxActivity extends AppCompatActivity implements ActivityLifecyclePr
         return lifecycleSubject.asObservable();
     }
 
+    @Nonnull
     @Override
-    public final <T> Observable.Transformer<T, T> bindUntilEvent(ActivityEvent event) {
-        return RxLifecycle.bindUntilActivityEvent(lifecycleSubject, event);
+    public LifecycleTransformer bindToLifecycle() {
+        return RxLifecycle.bind(lifecycle());
     }
 
+    @Nonnull
     @Override
-    public final <T> Observable.Transformer<T, T> bindToLifecycle() {
-        return RxLifecycle.bindActivity(lifecycleSubject);
+    public LifecycleTransformer bindUntilEvent(@Nonnull Object event) {
+        return RxLifecycle.bindUntilEvent(lifecycle(), (ActivityEvent) event);
     }
 
     @Override
