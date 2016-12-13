@@ -1,6 +1,7 @@
 package com.byndyusoft.androidinfrastructure.di.components;
 
 import com.byndyusoft.androidinfrastructure.di.modules.ActivityMainModule;
+import com.byndyusoft.androidinfrastructure.di.modules.ApplicationModule;
 import com.byndyusoft.androidinfrastructure.ui.main.MainActivity;
 import com.byndyusoft.androidinfrastructure.ui.main.MainFragment;
 
@@ -16,7 +17,7 @@ import dagger.Component;
  */
 
 @Singleton
-@Component(modules = {ActivityMainModule.class})
+@Component(modules = {ApplicationModule.class, ActivityMainModule.class})
 public interface ActivityMainComponent {
     void inject(MainActivity mainActivity);
 

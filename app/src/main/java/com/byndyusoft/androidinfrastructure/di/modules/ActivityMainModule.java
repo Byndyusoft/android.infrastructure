@@ -32,13 +32,6 @@ public class ActivityMainModule {
     @Provides
     @Singleton
     @NonNull
-    Context provideContext() {
-        return mainActivity;
-    }
-
-    @Provides
-    @Singleton
-    @NonNull
     MainRouter provideMainRouter() {
         return new MainRouterImpl(mainActivity.getSupportFragmentManager(), MainActivity.FRAGMENT_CONTAINER_ID);
     }

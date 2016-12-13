@@ -20,6 +20,7 @@ import com.byndyusoft.androidinfrastructure.R;
 import com.byndyusoft.androidinfrastructure.di.components.ActivityMainComponent;
 import com.byndyusoft.androidinfrastructure.di.components.DaggerActivityMainComponent;
 import com.byndyusoft.androidinfrastructure.di.modules.ActivityMainModule;
+import com.byndyusoft.androidinfrastructure.di.modules.ApplicationModule;
 import com.byndyusoft.androidinfrastructure.ui.base.BaseActivity;
 
 import javax.inject.Inject;
@@ -58,6 +59,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         super.onCreate(savedInstance);
 
         component = DaggerActivityMainComponent.builder()
+            .applicationModule(new ApplicationModule(this))
             .activityMainModule(new ActivityMainModule(this))
             .build();
         getComponent().inject(this);
