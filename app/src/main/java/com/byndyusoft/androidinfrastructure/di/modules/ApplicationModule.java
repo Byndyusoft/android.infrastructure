@@ -41,7 +41,7 @@ public class ApplicationModule {
     @NonNull
     Gson provideGson() {
         return new GsonBuilder()
-                .setDateFormat("yyyy-MM-dd'T'HH:mm:ssX")
+                .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
                 .create();
     }
 
