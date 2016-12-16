@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import com.byndyusoft.androidinfrastructure.R;
 import com.byndyusoft.androidinfrastructure.utils.keyboard.KeyboardVisibilityTracker;
 import com.byndyusoft.androidinfrastructure.utils.permission.PermissionsManager;
+import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
 
 /**
  * Created by Dmitrii Komiakov
@@ -19,7 +20,7 @@ import com.byndyusoft.androidinfrastructure.utils.permission.PermissionsManager;
  * on 28.10.2016.
  */
 
-public abstract class BaseActivity extends RxActivity implements KeyboardVisibilityTracker.OnKeyboardVisibilityListener {
+public abstract class BaseActivity extends RxAppCompatActivity implements KeyboardVisibilityTracker.OnKeyboardVisibilityListener {
 
     protected final String TAG = getClass().getSimpleName();
 
