@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.byndyusoft.androidinfrastructure.utils.keyboard.KeyboardVisibilityTracker;
 import com.byndyusoft.androidinfrastructure.utils.permission.PermissionsManager;
-import com.trello.rxlifecycle.components.support.RxFragment;
+import com.trello.rxlifecycle2.components.support.RxFragment;
 
 /**
  * Created by Dmitrii Komiakov
