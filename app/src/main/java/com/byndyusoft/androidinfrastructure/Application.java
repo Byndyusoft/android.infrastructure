@@ -1,4 +1,4 @@
-package com.byndyusoft.androidinfrastructure.core;
+package com.byndyusoft.androidinfrastructure;
 
 /**
  * Created by Dmitrii Komiakov
