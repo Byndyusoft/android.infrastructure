@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import com.byndyusoft.androidinfrastructure.R;
 import com.byndyusoft.androidinfrastructure.utils.keyboard.KeyboardVisibilityTracker;
 import com.byndyusoft.androidinfrastructure.utils.permission.PermissionsManager;
-import com.trello.rxlifecycle.components.support.RxAppCompatActivity;
+import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 /**
  * Created by Dmitrii Komiakov

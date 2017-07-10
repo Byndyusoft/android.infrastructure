@@ -6,8 +6,6 @@ import android.support.annotation.NonNull;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import org.jetbrains.annotations.NotNull;
-
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -25,7 +23,7 @@ public class ApplicationModule {
 
     private final Context context;
 
-    public ApplicationModule(@NotNull Context context) {
+    public ApplicationModule(@NonNull Context context) {
         this.context = context;
     }
 
