@@ -42,46 +42,22 @@ public abstract class MainFragment extends BaseFragment {
     @DebugLog
     protected void setDefaultNavOptions() {
         getMainFragmentCallback().setNavMenuEnabled(isNavMenuEnabled());
-        getMainFragmentCallback().setToolbarColor(getToolbarColor());
-        getMainFragmentCallback().setToolbarTitle(getToolbarTitle());
-        getMainFragmentCallback().setFragmentFullscreen(isFullscreen());
-        getMainFragmentCallback().setNavigationButtonType(getNavButtonType());
+        setHasOptionsMenu(isOptionsMenuEnabled());
     }
 
-    protected MainFragmentCallback getMainFragmentCallback() {
+    protected final MainFragmentCallback getMainFragmentCallback() {
         return mainFragmentCallback;
     }
 
-    protected MainRouter getRouter() {
+    protected final MainRouter getRouter() {
         return mainRouter;
     }
 
-    protected void popBackStack() {
+    protected final void popBackStack() {
         getMainFragmentCallback().popBackStack();
     }
 
-    protected boolean isNavMenuEnabled() {
-        return true;
-    }
+    protected abstract boolean isNavMenuEnabled();
 
-    protected boolean isFullscreen() {
-        return false;
-    }
-
-    protected MainFragmentCallback.NavButtonType getNavButtonType() {
-        return MainFragmentCallback.NavButtonType.None;
-    }
-
-    protected
-    @ColorInt
-    int getToolbarColor() {
-        return ContextCompat.getColor(getContext(), R.color.colorPrimary);
-    }
-
-    protected
-    @Nullable
-    String getToolbarTitle() {
-        return null;
-    }
-
+    protected abstract boolean isOptionsMenuEnabled();
 }
