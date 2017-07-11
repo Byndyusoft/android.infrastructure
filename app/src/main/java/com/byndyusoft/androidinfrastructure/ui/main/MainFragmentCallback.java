@@ -4,6 +4,7 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.Toolbar;
 
 import com.byndyusoft.androidinfrastructure.R;
 
@@ -15,25 +16,11 @@ import com.byndyusoft.androidinfrastructure.R;
  */
 
 public interface MainFragmentCallback {
-    enum NavButtonType {
-        None(0), Menu(R.drawable.ic_menu_white), Arrow(R.drawable.ic_arrow_back_white);
-        @DrawableRes
-        final int iconRes;
-
-        NavButtonType(final int iconRes) {
-            this.iconRes = iconRes;
-        }
-    }
-
     void popBackStack();
-
-    void setToolbarTitle(@Nullable String text);
-
-    void setToolbarColor(@ColorInt int color);
 
     void setNavMenuEnabled(boolean isEnabled);
 
-    void setFragmentFullscreen(boolean isFullscreen);
+    void setToolbar(Toolbar toolbar);
 
-    void setNavigationButtonType(@NonNull final NavButtonType navigationButtonType);
+    void showNavigationMenu();
 }
