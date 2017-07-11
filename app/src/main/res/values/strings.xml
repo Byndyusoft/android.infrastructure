@@ -2,5 +2,7 @@
     <string name="app_name">android.infrastructure</string>
     <string name="nav_menu_list">List with items</string>
     <string name="naw_menu_pager">View pager</string>
+    <string name="view_pager_title">View pager</string>
+    <string name="list_title">List</string>
 
 </resources>

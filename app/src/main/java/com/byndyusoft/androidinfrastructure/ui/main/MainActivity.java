@@ -1,20 +1,14 @@
 package com.byndyusoft.androidinfrastructure.ui.main;
 
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.ColorInt;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.RelativeLayout;
 
 import com.byndyusoft.androidinfrastructure.R;
 import com.byndyusoft.androidinfrastructure.di.components.ActivityMainComponent;
@@ -38,12 +32,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     @Inject
     MainRouter router;
 
-    private Toolbar toolbar;
     private DrawerLayout drawer;
     private NavigationView navigationView;
-    private AppBarLayout appBarLayout;
-
-    private NavButtonType navButtonType;
 
     private ActivityMainComponent component;
 
@@ -70,36 +60,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
 
-        appBarLayout = (AppBarLayout) findViewById(R.id.main_appbar);
-        toolbar = (Toolbar) findViewById(R.id.main_toolbar);
-        setSupportActionBar(toolbar);
-
         router.openListFragment();
     }
 
     @Override
     protected int getLayoutId() {
         return R.layout.activity_main;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (super.onOptionsItemSelected(item)) {
-            return true;
-        }
-        switch (item.getItemId()) {
-            case android.R.id.home: {
-                if (navButtonType == NavButtonType.Arrow) {
-                    popBackStack();
-                } else if (navButtonType == NavButtonType.Menu && drawer.isDrawerOpen(GravityCompat.START)) {
-                    drawer.closeDrawer(GravityCompat.START);
-                } else if (navButtonType == NavButtonType.Menu && !drawer.isDrawerOpen(GravityCompat.START)) {
-                    drawer.openDrawer(GravityCompat.START);
-                }
-                break;
-            }
-        }
-        return false;
     }
 
     @Override
@@ -127,47 +93,17 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     }
 
     @Override
-    public void setToolbarTitle(@Nullable String text) {
-        toolbar.setTitle(text);
-        getSupportActionBar().setTitle(text);
-    }
-
-    @Override
-    public void setToolbarColor(@ColorInt int color) {
-        toolbar.setBackgroundColor(color);
-        appBarLayout.setBackgroundColor(color);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && color == Color.TRANSPARENT) {
-            appBarLayout.setElevation(0);
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            appBarLayout.setElevation(getResources().getDisplayMetrics().density * 4);
-        }
-    }
-
-    @Override
     public void setNavMenuEnabled(boolean isEnabled) {
         drawer.setDrawerLockMode(isEnabled ? DrawerLayout.LOCK_MODE_UNLOCKED : DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
     }
 
     @Override
-    public void setFragmentFullscreen(boolean isFullscreen) {
-        View fragmentContainer = findViewById(FRAGMENT_CONTAINER_ID);
-        //noinspection ConstantConditions
-        final RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) fragmentContainer.getLayoutParams();
-        if (isFullscreen) {
-            lp.addRule(RelativeLayout.BELOW, 0);
-        } else {
-            lp.addRule(RelativeLayout.BELOW, R.id.main_appbar);
-        }
-        fragmentContainer.setLayoutParams(lp);
+    public void setToolbar(Toolbar toolbar) {
+        setSupportActionBar(toolbar);
     }
 
     @Override
-    public void setNavigationButtonType(@NonNull NavButtonType navigationButtonType) {
-        this.navButtonType = navigationButtonType;
-        if (navigationButtonType == NavButtonType.None) {
-            toolbar.setNavigationIcon(null);
-        } else {
-            toolbar.setNavigationIcon(navigationButtonType.iconRes);
-        }
+    public void showNavigationMenu() {
+        drawer.openDrawer(GravityCompat.START);
     }
 }
