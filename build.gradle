@@ -26,7 +26,9 @@ allprojects {
 
 ext {
     supportLibVersion = '25.3.1'
-    constraintLayout = '1.0.2'
+    constraintLayoutVersion = '1.0.2'
+    okHttpVersion = '3.8.1'
+    retrofitVersion = '2.3.0'
 }
 
 task clean(type: Delete) {
