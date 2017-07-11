@@ -1,14 +1,14 @@
 package com.byndyusoft.androidinfrastructure.ui.viewPager;
 
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.byndyusoft.androidinfrastructure.R;
 import com.byndyusoft.androidinfrastructure.ui.main.MainFragment;
-import com.byndyusoft.androidinfrastructure.ui.main.MainFragmentCallback;
 
 /**
  * Created by Dmitrii Komiakov
@@ -26,6 +26,9 @@ public class ViewPagerFragment extends MainFragment {
 
     @Override
     protected void onViewInflated(@NonNull View view) {
+        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        getMainFragmentCallback().setToolbar(toolbar);
+
         ViewPager viewPager = (ViewPager) view.findViewById(R.id.view_pager);
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager());
         viewPager.setAdapter(viewPagerAdapter);
@@ -36,15 +39,22 @@ public class ViewPagerFragment extends MainFragment {
     }
 
     @Override
-    protected MainFragmentCallback.NavButtonType getNavButtonType() {
-        return MainFragmentCallback.NavButtonType.Menu;
+    protected boolean isNavMenuEnabled() {
+        return true;
     }
 
-
-    @Nullable
     @Override
-    protected String getToolbarTitle() {
-        return "View pager";
+    protected boolean isOptionsMenuEnabled() {
+        return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                getMainFragmentCallback().showNavigationMenu();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

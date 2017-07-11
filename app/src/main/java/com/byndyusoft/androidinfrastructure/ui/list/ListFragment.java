@@ -1,14 +1,14 @@
 package com.byndyusoft.androidinfrastructure.ui.list;
 
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.byndyusoft.androidinfrastructure.R;
 import com.byndyusoft.androidinfrastructure.core.listItem.ListItem;
 import com.byndyusoft.androidinfrastructure.ui.main.MainFragment;
-import com.byndyusoft.androidinfrastructure.ui.main.MainFragmentCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +29,9 @@ public class ListFragment extends MainFragment {
 
     @Override
     protected void onViewInflated(@NonNull View view) {
+        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        getMainFragmentCallback().setToolbar(toolbar);
+
         ListAdapter listAdapter = new ListAdapter();
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.list_view);
         recyclerView.setAdapter(listAdapter);
@@ -41,15 +44,22 @@ public class ListFragment extends MainFragment {
     }
 
     @Override
-    protected MainFragmentCallback.NavButtonType getNavButtonType() {
-        return MainFragmentCallback.NavButtonType.Menu;
+    protected boolean isNavMenuEnabled() {
+        return true;
     }
 
-
-    @Nullable
     @Override
-    protected String getToolbarTitle() {
-        return "List";
+    protected boolean isOptionsMenuEnabled() {
+        return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                getMainFragmentCallback().showNavigationMenu();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }
