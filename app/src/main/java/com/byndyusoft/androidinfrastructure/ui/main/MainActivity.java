@@ -38,6 +38,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private ActivityMainComponent component;
 
     public ActivityMainComponent getComponent() {
+        if (component == null) {
+            component = DaggerActivityMainComponent.builder()
+                    .applicationModule(new ApplicationModule(this))
+                    .activityMainModule(new ActivityMainModule(this))
+                    .build();
+        }
         return component;
     }
 
@@ -47,11 +53,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     @Override
     public void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
-
-        component = DaggerActivityMainComponent.builder()
-            .applicationModule(new ApplicationModule(this))
-            .activityMainModule(new ActivityMainModule(this))
-            .build();
         getComponent().inject(this);
 
         drawer = (DrawerLayout) findViewById(R.id.main_drawer);
@@ -60,7 +61,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
 
-        router.openListFragment();
+        if (savedInstance == null) {
+            router.openListFragment();
+        }
     }
 
     @Override
