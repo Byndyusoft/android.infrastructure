@@ -20,7 +20,10 @@ import java.util.List;
  * on 31.10.2016.
  */
 
-public class ListFragment extends MainFragment {
+public class ListFragment extends MainFragment implements ListView {
+
+    private ListPresenter presenter;
+    private ListAdapter adapter;
 
     @Override
     protected int getLayoutRes() {
@@ -32,15 +35,13 @@ public class ListFragment extends MainFragment {
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
         getMainFragmentCallback().setToolbar(toolbar);
 
-        ListAdapter listAdapter = new ListAdapter();
+        adapter = new ListAdapter();
         RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.list_view);
-        recyclerView.setAdapter(listAdapter);
+        recyclerView.setAdapter(adapter);
 
-        List<ListItem> list = new ArrayList<>();
-        for (int i = 0; i < 30; i++) {
-            list.add(new ListItem("John", "Doe", 25 + i));
-        }
-        listAdapter.setDataList(list);
+        presenter = new ListPresenter(this);
+
+        presenter.getListData();
     }
 
     @Override
@@ -61,5 +62,10 @@ public class ListFragment extends MainFragment {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void setData(List<ListItem> items) {
+        adapter.setDataList(items);
     }
 }
